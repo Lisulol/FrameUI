@@ -1,4 +1,4 @@
-# Horror Movie Database
+# Frame UI
 
 FrameUi is a component library with its own npm package
 
