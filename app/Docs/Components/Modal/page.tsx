@@ -200,7 +200,7 @@ export default function Button() {
                   <div className="w-2/3 h-1/3 flex items-center justify-center">
                     <div className="w-full h-full">
                       <CodeBox>
-                        <div className="h-full w-full overflow-y-auto p-1">
+                        <div className="h-full w-full overflow-y-auto p-4">
                           <pre className="text-sm">
                             {`export default function MainPage() {
     
