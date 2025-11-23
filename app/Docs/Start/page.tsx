@@ -8,6 +8,11 @@ import { useState, useEffect } from "react"
 export default function DocsPage() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [menuVisible, setMenuVisible] = useState(false)
+  const [instalation, showInstalation] = useState(false)
+  const [showcomponents, setshowComponents] = useState(false)
+  const [instalationMethod, setInstallationMethod] = useState<
+    "pnpm" | "npm" | "yarn"
+  >("npm")
 
   useEffect(() => {
     if (menuOpen) {
@@ -123,13 +128,68 @@ export default function DocsPage() {
             built with tailwind. It helps you to quickly "frame" your web app,
             hence the name. Start here:
           </p>
-          <div className="w-full h-4/5 gap-15 grid-cols-2 grid-rows-4 grid">
-            <button className="font-bold hover:bg-[#bbbbbb] border rounded-2xl p-15">
-              Instalation
-            </button>
-            <button className="font-bold hover:bg-[#bbbbbb] border rounded-2xl p-15">
-              Components
-            </button>
+          <div className="w-full h-4/5 gap-15 flex flex-row  justify-center">
+            <div className="w-1/2 h-full flex-col  flex">
+              <button
+                className="font-bold hover:bg-[#bbbbbb] border rounded-2xl w-full h-50 p-15"
+                onClick={() => showInstalation(!instalation)}
+              >
+                Instalation
+              </button>
+              {instalation && (
+                <div className="w-ull h-full flex gap-5 flex-col">
+                  <div className="flex-row flex border-b p-5 font-bold  justify-between gap-x-15">
+                    <button
+                      className="items-center justify-center flex hover:cursor-pointer hover:bg-gray-300 p-2 rounded-md"
+                      onClick={() => setInstallationMethod("npm")}
+                    >
+                      npm
+                    </button>
+                    <button
+                      className="items-center justify-center flex hover:cursor-pointer hover:bg-gray-300 p-2 rounded-md"
+                      onClick={() => setInstallationMethod("pnpm")}
+                    >
+                      pnpm
+                    </button>
+                    <button
+                      className="items-center justify-center flex hover:cursor-pointer hover:bg-gray-300 p-2 rounded-md"
+                      onClick={() => setInstallationMethod("yarn")}
+                    >
+                      yarn
+                    </button>
+                  </div>
+                  {instalationMethod === "npm" && (
+                    <div className="w-full ">
+                      <p className="bg-[#b8b8b8] w-100 font-bold p-5 rounded-4xl border ">
+                        {`${instalationMethod} install frameui-package`}
+                      </p>
+                    </div>
+                  )}
+                  {instalationMethod === "pnpm" && (
+                    <div className="w-full ">
+                      <p className="bg-[#b8b8b8] w-100 font-bold p-5 rounded-4xl border ">
+                        coming soon
+                      </p>
+                    </div>
+                  )}
+                  {instalationMethod === "yarn" && (
+                    <div className="w-full ">
+                      <p className="bg-[#b8b8b8] w-100 font-bold p-5 rounded-4xl border ">
+                        coming soon{" "}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+            <div className="w-1/2 h-full  justify-center flex">
+              <button
+                className="font-bold hover:bg-[#bbbbbb] border rounded-2xl w-full h-50 p-15"
+                onClick={() => setshowComponents(!showcomponents)}
+              >
+                Components
+              </button>
+            </div>
           </div>
         </div>
       </div>

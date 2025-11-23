@@ -119,7 +119,7 @@ export default function NavBarPage() {
                   </p>
                 </div>
               </Link>
-              <Link href="/Docs/Components/InputPopUp" className="w-full">
+              <Link href="/Docs/Components/input" className="w-full">
                 <div className="hover:cursor-pointer  rounded-2xl hover:bg-[#535353] w-full h-20 items-center justify-center flex">
                   <p className="items-center justify-center flex font-bold">
                     Input Pop Up
@@ -131,7 +131,7 @@ export default function NavBarPage() {
         </Menu>
       )}
       <div className="h-full w-full items-center justify-center flex overflow-y-auto">
-        <div className="flex flex-col h-4/5 w-4/5 border rounded-4xl gap-10 p-15 items-center justify-center overflow-hidden">
+        <div className="flex flex-col h-4/5 w-4/5 border rounded-4xl gap-10 p-15 overflow-y-auto">
           <div className="w-full h-16">
             <p className=" text-6xl flex items-center flex-row">
               <IconPoint />
@@ -146,7 +146,7 @@ export default function NavBarPage() {
               <div className="flex items-center justify-center flex-col gap-40">
                 <div className="flex flex-col items-center justify-center gap-5">
                   <p className="border border-black bg-white rounded-2xl p-3 font-bold ">
-                    Example
+                    Look at the top of this site
                   </p>
                   <div className="w-1/3 h-1/3 flex items-center justify-center">
                     <div>
@@ -156,9 +156,11 @@ export default function NavBarPage() {
                             {`export default function MainPage() {
     
     return (
-      <Button>
-      Example
-      </Button>
+      <NavBar>
+      <div className="flex items-center justify-between w-full h-full">
+      // Your content here
+      </div>
+      </NavBar>
     )
 }`}
                           </pre>
@@ -200,12 +202,18 @@ export default function NavBarPage() {
                         <CodeBox>
                           <div className="h-full w-full overflow-auto p-5">
                             <pre className="text-sm">
-                              {`export default function Button({ children }: { children: React.ReactNode }) {
-   return (
-    <button className="border border-black bg-white rounded-2xl p-3 font-bold hover:cursor-pointer hover:bg-gray-200">
-    {children}
-    </button>
-  )
+                              {`import type { ReactNode } from "react"
+                              
+type NavBarProps = {
+    children?: ReactNode
+}
+                              
+export default function NavBar({ children }: NavBarProps) {
+    return (
+        <div className="w-full z-10 h-15 p-5 border-b-4 border-black bg-[#ececec] font-bold text-2xl">
+            {children}
+        </div>
+    )
 }`}
                             </pre>
                           </div>
@@ -224,7 +232,7 @@ export default function NavBarPage() {
                       }
                     >
                       <p className="bg-[#b8b8b8] w-100 p-5 rounded-4xl border ">
-                        CLI Coming soon
+                        npm i frameui-package
                       </p>
                     </div>
                   )}

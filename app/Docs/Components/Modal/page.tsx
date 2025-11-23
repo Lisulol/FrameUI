@@ -143,7 +143,7 @@ export default function Button() {
                   </p>
                 </div>
               </Link>
-              <Link href="/Docs/Components/InputPopUp" className="w-full">
+              <Link href="/Docs/Components/input" className="w-full">
                 <div className="hover:cursor-pointer  rounded-2xl hover:bg-[#535353] w-full h-20 items-center justify-center flex">
                   <p className="items-center justify-center flex font-bold">
                     Input Pop Up
@@ -155,7 +155,7 @@ export default function Button() {
         </Menu>
       )}
       <div className="h-full w-full items-center justify-center flex overflow-y-auto">
-        <div className="flex flex-col h-4/5 w-4/5  border rounded-4xl gap-10 p-15 items-center justify-center overflow-y-auto">
+        <div className="flex flex-col h-4/5 w-4/5  border rounded-4xl gap-10 p-15 overflow-y-auto">
           <div className="w-full h-16">
             <p className=" text-6xl flex items-center flex-row">
               <IconPoint />
@@ -267,7 +267,7 @@ export default function Button() {
                       }
                     >
                       <p className="bg-[#b8b8b8] w-100 p-5 rounded-4xl border ">
-                        CLI Coming soon
+                        npm i frameui-package
                       </p>
                     </div>
                   )}
