@@ -1,8 +1,8 @@
 "use client"
 import CodeBox from "@/components/Code/code"
 import Menu from "@/components/Menu/menu"
-
 import NavBar from "@/components/NavBar/navbar"
+import SearchBar from "@/components/searchbar/searchbar"
 import {
   IconChevronLeft,
   IconMenu2,
@@ -12,15 +12,14 @@ import {
 import Link from "next/link"
 import { useEffect, useState } from "react"
 
-export default function Carousel() {
+export default function Button() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [isVisible, setisVisible] = useState(false)
   const [installmethod, setInstallmethod] = useState<"Manual" | "CLI">("CLI")
-  const [modalVisible, setmodalVisible] = useState(false)
 
-  function showModal() {
-    setmodalVisible(true)
-  }
+  useEffect(() => {
+    setTimeout(() => setisVisible(true), 10)
+  }, [])
   useEffect(() => {
     if (menuOpen) {
       setMenuOpen(true)
@@ -29,10 +28,6 @@ export default function Carousel() {
       return () => clearTimeout(timer)
     }
   }, [menuOpen, setMenuOpen])
-
-  useEffect(() => {
-    setTimeout(() => setisVisible(true), 10)
-  }, [])
 
   return (
     <div
@@ -48,10 +43,10 @@ export default function Carousel() {
           >
             <IconMenu2 />
           </button>
-          <p>FrameUI</p>
-          <button className="hover:cursor-pointer hover:bg-gray-300 p-2 rounded-md">
-            <IconSearch />
-          </button>
+          <Link href="/" passHref>
+            <p>FrameUI</p>
+          </Link>
+          <SearchBar />
         </div>
       </NavBar>
       {menuOpen && (
@@ -104,10 +99,10 @@ export default function Carousel() {
                   </p>
                 </div>
               </Link>
-              <Link href="/Docs/Components/Carousel" className="w-full">
+              <Link href="/Docs/Components/ProgressBar" className="w-full">
                 <div className="hover:cursor-pointer rounded-2xl hover:bg-[#535353] w-full h-20 items-center justify-center flex">
                   <p className="items-center justify-center flex font-bold">
-                    Carousel
+                    Progress Bar
                   </p>
                 </div>
               </Link>
@@ -132,59 +127,60 @@ export default function Carousel() {
                   </p>
                 </div>
               </Link>
+              <Link href="/Docs/Components/Slider" className="w-full">
+                <div className="hover:cursor-pointer  rounded-2xl hover:bg-[#535353] w-full h-20 items-center justify-center flex">
+                  <p className="items-center justify-center flex font-bold">
+                    Slider
+                  </p>
+                </div>
+              </Link>
+              <Link href="/Docs/Components/switch" className="w-full">
+                <div className="hover:cursor-pointer  rounded-2xl hover:bg-[#535353] w-full h-20 items-center justify-center flex">
+                  <p className="items-center justify-center flex font-bold">
+                    Switch
+                  </p>
+                </div>
+              </Link>
+              <Link href="/Docs/Components/Codebox" className="w-full">
+                <div className="hover:cursor-pointer  rounded-2xl hover:bg-[#535353] w-full h-20 items-center justify-center flex">
+                  <p className="items-center justify-center flex font-bold">
+                    Code box
+                  </p>
+                </div>
+              </Link>
             </div>
           </div>
         </Menu>
       )}
       <div className="h-full w-full items-center justify-center flex overflow-y-auto">
-        <div className="flex flex-col h-4/5 w-4/5  border rounded-4xl gap-40 p-15   overflow-y-auto">
-          <div className="w-full h-16 p-3">
+        <div className="flex flex-col h-4/5 w-4/5 border rounded-4xl gap-10 p-15  overflow-y-auto">
+          <div className="w-full h-16">
             <p className=" text-6xl flex items-center flex-row">
               <IconPoint />
-              Carousel
+              Codebox
             </p>
             <p className="ml-7 text-xl font-bold">
-              Carousel component allows you to create a slideshow for cycling
-              through a series of content, such as images or text.
+              A box to display code snippets in your documentation
             </p>
           </div>
           <div>
             <div className="flex-col gap-y-5 font-bold flex items-center justify-center">
               <div className="flex items-center justify-center flex-col gap-40">
                 <div className="flex flex-col items-center justify-center gap-5">
-                  <button
-                    className="border border-black bg-white rounded-2xl p-3 font-bold hover:cursor-pointer hover:bg-gray-200"
-                    onClick={showModal}
-                  >
-                    Example
-                  </button>
-                  <div className="w-2/3 h-1/3 flex items-center justify-center">
-                    <div className="w-full h-full">
+                  <div></div>
+                  <div className="w-1/3 h-1/3 flex items-center justify-center">
+                    <div>
                       <CodeBox>
-                        <div className="h-full w-full overflow-y-auto p-1">
-                          <pre className="text-sm">
+                        <div className="h-full w-full overflow-auto">
+                          <pre className="p-5 text-sm">
                             {`export default function MainPage() {
     
     return (
-    <div className="h-screen w-full overflow-hidden">  
-    {modalVisible && (
-        <div
-          className="fixed h-screen w-full bg-white flex items-center justify-center z-99"
-          onClick={() => setmodalVisible(false)}
-        >
-          <Modal>
-            <div
-              className="h-full w-full items-center flex justify-center"
-              onClick={(m) => m.stopPropagation()}
-            >
-              <p className="font-bold">
-                Example Modal <br />
-                <span className="text-sm">Click outside to exit</span>
-              </p>
-            </div>
-          </Modal>
-        </div>
-      )}
+        <Codebox>
+            <pre>
+            // Your code here
+            </pre>
+        </Codebox>
     )
 }`}
                           </pre>
@@ -226,13 +222,39 @@ export default function Carousel() {
                         <CodeBox>
                           <div className="h-full w-full overflow-auto p-5">
                             <pre className="text-sm">
-                              {`export default function Modal({ children }: { children: React.ReactNode }) {
-   return (
-    <div className="flex items-center rounded-4xl border-2 bg-[#e7e7e7] justify-center w-4/5 h-4/5 p-15">
-      {children}
+                              {`import { IconCopy } from "@tabler/icons-react"
+
+export default function CodeBox({ children }: { children: React.ReactNode }) {
+  function handleCopy(e: React.MouseEvent<SVGSVGElement>) {
+    if (typeof window !== "undefined") {
+      const codeBoxDiv = (e.currentTarget as SVGSVGElement).closest(
+        ".codebox-container"
+      )
+      const codeElement = codeBoxDiv?.querySelector("pre")
+      if (codeElement) {
+        const codeText = codeElement.textContent || ""
+        navigator.clipboard.writeText(codeText)
+      }
+    }
+  }
+  return (
+    <div className="w-full flex-col border h-full flex items-center justify-center bg-[#cccbcb] rounded-4xl codebox-container">
+      <div className="h-10 p-5 w-full border-b flex items-center justify-between">
+        <p>Code.tsx</p>
+        <div className="hover:after:">
+          <IconCopy
+            onClick={handleCopy}
+            className="hover:cursor-pointer hover:bg-gray-300 p-2 rounded-md"
+          />
+        </div>
+      </div>
+      <div className="h-full w-full bg-[#b8b8b8] rounded-b-4xl text-black">
+        {children}
+      </div>
     </div>
   )
-}`}
+}
+`}
                             </pre>
                           </div>
                         </CodeBox>
@@ -241,7 +263,7 @@ export default function Carousel() {
                   )}
                   {installmethod === "CLI" && (
                     <div
-                      className="flex flex-col gap-5"
+                      className="flex w-full flex-col gap-5"
                       style={
                         {
                           opacity: 0,
@@ -249,9 +271,9 @@ export default function Carousel() {
                         } as React.CSSProperties
                       }
                     >
-                      <p className="bg-[#b8b8b8] w-100 p-5 rounded-4xl border ">
-                        npm i frameui-package
-                      </p>
+                      <CodeBox>
+                        <pre className="text-sm p-5 w-full">{`npm i frameui-package`}</pre>
+                      </CodeBox>
                     </div>
                   )}
                 </div>

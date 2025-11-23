@@ -3,6 +3,8 @@ import CodeBox from "@/components/Code/code"
 import Menu from "@/components/Menu/menu"
 import NavBar from "@/components/NavBar/navbar"
 import SearchBar from "@/components/searchbar/searchbar"
+import Slider from "@/components/slider/slider"
+import SwitchComponent from "@/components/switch/switch"
 import {
   IconChevronLeft,
   IconMenu2,
@@ -12,10 +14,11 @@ import {
 import Link from "next/link"
 import { useEffect, useState } from "react"
 
-export default function Button() {
+export default function SwitchPage() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [isVisible, setisVisible] = useState(false)
   const [installmethod, setInstallmethod] = useState<"Manual" | "CLI">("CLI")
+  const [progress, setProgress] = useState(50)
 
   useEffect(() => {
     setTimeout(() => setisVisible(true), 10)
@@ -157,30 +160,29 @@ export default function Button() {
           <div className="w-full h-16">
             <p className=" text-6xl flex items-center flex-row">
               <IconPoint />
-              Button
+              Switch
             </p>
             <p className="ml-7 text-xl font-bold">
-              Well a button nothing more nothing less
+              A simple and customizable switch component for toggling between on
+              and off states.
             </p>
           </div>
           <div>
             <div className="flex-col gap-y-5 font-bold flex items-center justify-center">
               <div className="flex items-center justify-center flex-col gap-40">
                 <div className="flex flex-col items-center justify-center gap-5">
-                  <button className="border border-black bg-white rounded-2xl p-3 font-bold hover:cursor-pointer hover:bg-gray-200">
-                    Example
-                  </button>
+                  <div className="flex flex-row gap-y-20 items-center justify-center gap-10">
+                    <SwitchComponent /> <p className="flex">ON/OFF</p>
+                  </div>
                   <div className="w-1/3 h-1/3 flex items-center justify-center">
                     <div>
                       <CodeBox>
                         <div className="h-full w-full overflow-auto">
                           <pre className="p-5 text-sm">
                             {`export default function MainPage() {
-    
+    const [value, setvalue] = useState(50)
     return (
-      <Button>
-      Example
-      </Button>
+      <Slider value={value} setvalue={setvalue} />
     )
 }`}
                           </pre>
@@ -208,7 +210,7 @@ export default function Button() {
                   {installmethod === "Manual" && (
                     <div className=" w-2/3 h-full items-center justify-center flex flex-col gap-5">
                       <div
-                        className="border w-full p-10 rounded-4xl"
+                        className="border w-full p-10 gap-5 flex flex-col rounded-4xl"
                         style={
                           {
                             opacity: 0,
@@ -217,16 +219,24 @@ export default function Button() {
                         }
                       >
                         <p className="font-bold text-sm">
-                          Copy the code ant put it in your component
+                          Install dependeceies
+                        </p>
+                        <CodeBox>
+                          <pre className="text-sm p-4">{`npm install @radix-ui/react-switch`}</pre>
+                        </CodeBox>
+                        <p className="font-bold text-sm">
+                          Copy the code and put it in your component
                         </p>
                         <CodeBox>
                           <div className="h-full w-full overflow-auto p-5">
-                            <pre className="text-sm">
-                              {`export default function Button({ children }: { children: React.ReactNode }) {
-   return (
-    <button className="border border-black bg-white rounded-2xl p-3 font-bold hover:cursor-pointer hover:bg-gray-200">
-    {children}
-    </button>
+                            <pre className="text-sm overflow-x-auto">
+                              {`import * as Switch from "@radix-ui/react-switch"
+
+export default function SwitchComponent() {
+  return (
+    <Switch.Root className="w-12 h-7 bg-gray-300 rounded-full relative data-[state=checked]:bg-blue-500 transition-colors">
+      <Switch.Thumb className="block w-5 h-5 bg-white rounded-full shadow-md transform translate-x-1 data-[state=checked]:translate-x-6 transition-transform" />
+    </Switch.Root>
   )
 }`}
                             </pre>

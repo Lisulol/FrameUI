@@ -4,6 +4,7 @@ import Input from "@/components/input/input"
 import Menu from "@/components/Menu/menu"
 
 import NavBar from "@/components/NavBar/navbar"
+import SearchBar from "@/components/searchbar/searchbar"
 import {
   IconChevronLeft,
   IconMenu2,
@@ -71,10 +72,10 @@ export default function Button() {
           >
             <IconMenu2 />
           </button>
-          <p>FrameUI</p>
-          <button className="hover:cursor-pointer hover:bg-gray-300 p-2 rounded-md">
-            <IconSearch />
-          </button>
+          <Link href="/" passHref>
+            <p>FrameUI</p>
+          </Link>
+          <SearchBar />
         </div>
       </NavBar>
       {menuOpen && (
@@ -127,10 +128,10 @@ export default function Button() {
                   </p>
                 </div>
               </Link>
-              <Link href="/Docs/Components/Carousel" className="w-full">
+              <Link href="/Docs/Components/ProgressBar" className="w-full">
                 <div className="hover:cursor-pointer rounded-2xl hover:bg-[#535353] w-full h-20 items-center justify-center flex">
                   <p className="items-center justify-center flex font-bold">
-                    Carousel
+                    Progress Bar
                   </p>
                 </div>
               </Link>
@@ -152,6 +153,27 @@ export default function Button() {
                 <div className="hover:cursor-pointer  rounded-2xl hover:bg-[#535353] w-full h-20 items-center justify-center flex">
                   <p className="items-center justify-center flex font-bold">
                     Input Pop Up
+                  </p>
+                </div>
+              </Link>
+              <Link href="/Docs/Components/Slider" className="w-full">
+                <div className="hover:cursor-pointer  rounded-2xl hover:bg-[#535353] w-full h-20 items-center justify-center flex">
+                  <p className="items-center justify-center flex font-bold">
+                    Slider
+                  </p>
+                </div>
+              </Link>
+              <Link href="/Docs/Components/switch" className="w-full">
+                <div className="hover:cursor-pointer  rounded-2xl hover:bg-[#535353] w-full h-20 items-center justify-center flex">
+                  <p className="items-center justify-center flex font-bold">
+                    Switch
+                  </p>
+                </div>
+              </Link>
+              <Link href="/Docs/Components/Codebox" className="w-full">
+                <div className="hover:cursor-pointer  rounded-2xl hover:bg-[#535353] w-full h-20 items-center justify-center flex">
+                  <p className="items-center justify-center flex font-bold">
+                    Code box
                   </p>
                 </div>
               </Link>
@@ -270,7 +292,7 @@ export default function Input({ message, value, setValue }: InputProps) {
                   )}
                   {installmethod === "CLI" && (
                     <div
-                      className="flex flex-col gap-5"
+                      className="flex w-full flex-col gap-5"
                       style={
                         {
                           opacity: 0,
@@ -278,9 +300,9 @@ export default function Input({ message, value, setValue }: InputProps) {
                         } as React.CSSProperties
                       }
                     >
-                      <p className="bg-[#b8b8b8] w-100 p-5 rounded-4xl border ">
-                        npm i frameui-package
-                      </p>
+                      <CodeBox>
+                        <pre className="text-sm p-5 w-full">{`npm i frameui-package`}</pre>
+                      </CodeBox>
                     </div>
                   )}
                 </div>

@@ -1,6 +1,7 @@
 "use client"
 import Menu from "@/components/Menu/menu"
 import NavBar from "@/components/NavBar/navbar"
+import SearchBar from "@/components/searchbar/searchbar"
 import { IconChevronLeft, IconMenu2, IconSearch } from "@tabler/icons-react"
 import Link from "next/link"
 import { useState, useEffect } from "react"
@@ -32,13 +33,13 @@ export default function DocsPage() {
           >
             <IconMenu2 />
           </button>
-          <p>FrameUI</p>
-          <button className="hover:cursor-pointer hover:bg-gray-300 p-2 rounded-md">
-            <IconSearch />
-          </button>
+          <Link href="/" passHref>
+            <p>FrameUI</p>
+          </Link>
+          <SearchBar />
         </div>
       </NavBar>
-      {menuVisible && (
+      {menuOpen && (
         <Menu>
           <div
             className="w-full h-full"
@@ -88,10 +89,10 @@ export default function DocsPage() {
                   </p>
                 </div>
               </Link>
-              <Link href="/Docs/Components/Carousel" className="w-full">
+              <Link href="/Docs/Components/ProgressBar" className="w-full">
                 <div className="hover:cursor-pointer rounded-2xl hover:bg-[#535353] w-full h-20 items-center justify-center flex">
                   <p className="items-center justify-center flex font-bold">
-                    Carousel
+                    Progress Bar
                   </p>
                 </div>
               </Link>
@@ -109,10 +110,31 @@ export default function DocsPage() {
                   </p>
                 </div>
               </Link>
-              <Link href="/Docs/Components/InputPopUp" className="w-full">
+              <Link href="/Docs/Components/input" className="w-full">
                 <div className="hover:cursor-pointer  rounded-2xl hover:bg-[#535353] w-full h-20 items-center justify-center flex">
                   <p className="items-center justify-center flex font-bold">
                     Input Pop Up
+                  </p>
+                </div>
+              </Link>
+              <Link href="/Docs/Components/Slider" className="w-full">
+                <div className="hover:cursor-pointer  rounded-2xl hover:bg-[#535353] w-full h-20 items-center justify-center flex">
+                  <p className="items-center justify-center flex font-bold">
+                    Slider
+                  </p>
+                </div>
+              </Link>
+              <Link href="/Docs/Components/switch" className="w-full">
+                <div className="hover:cursor-pointer  rounded-2xl hover:bg-[#535353] w-full h-20 items-center justify-center flex">
+                  <p className="items-center justify-center flex font-bold">
+                    Switch
+                  </p>
+                </div>
+              </Link>
+              <Link href="/Docs/Components/Codebox" className="w-full">
+                <div className="hover:cursor-pointer  rounded-2xl hover:bg-[#535353] w-full h-20 items-center justify-center flex">
+                  <p className="items-center justify-center flex font-bold">
+                    Code box
                   </p>
                 </div>
               </Link>
@@ -183,12 +205,11 @@ export default function DocsPage() {
               )}
             </div>
             <div className="w-1/2 h-full  justify-center flex">
-              <button
-                className="font-bold hover:bg-[#bbbbbb] border rounded-2xl w-full h-50 p-15"
-                onClick={() => setshowComponents(!showcomponents)}
-              >
-                Components
-              </button>
+              <Link href="/Docs/Components" className="w-full">
+                <button className="font-bold hover:bg-[#bbbbbb] border rounded-2xl w-full h-50 p-15">
+                  Components
+                </button>
+              </Link>
             </div>
           </div>
         </div>

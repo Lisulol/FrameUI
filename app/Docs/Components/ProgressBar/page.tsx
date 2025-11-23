@@ -1,8 +1,8 @@
 "use client"
 import CodeBox from "@/components/Code/code"
 import Menu from "@/components/Menu/menu"
+import ProgressBar from "@/components/progressbar/progressbar"
 import NavBar from "@/components/NavBar/navbar"
-import SearchBar from "@/components/searchbar/searchbar"
 import {
   IconChevronLeft,
   IconMenu2,
@@ -11,23 +11,18 @@ import {
 } from "@tabler/icons-react"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import Slider from "@/components/slider/slider"
+import SearchBar from "@/components/searchbar/searchbar"
 
-export default function Button() {
+export default function ProgressBarPage() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [isVisible, setisVisible] = useState(false)
-  const [installmethod, setInstallmethod] = useState<"Manual" | "CLI">("CLI")
+  const [installmethod, setInstallmethod] = useState<"Manual" | "CLI">("Manual")
+  const [progress, setProgress] = useState(50)
 
   useEffect(() => {
     setTimeout(() => setisVisible(true), 10)
   }, [])
-  useEffect(() => {
-    if (menuOpen) {
-      setMenuOpen(true)
-    } else {
-      const timer = setTimeout(() => setMenuOpen(false), 500)
-      return () => clearTimeout(timer)
-    }
-  }, [menuOpen, setMenuOpen])
 
   return (
     <div
@@ -157,31 +152,37 @@ export default function Button() {
           <div className="w-full h-16">
             <p className=" text-6xl flex items-center flex-row">
               <IconPoint />
-              Button
+              Progress Bar
             </p>
             <p className="ml-7 text-xl font-bold">
-              Well a button nothing more nothing less
+              Visual representation of progress
             </p>
           </div>
           <div>
             <div className="flex-col gap-y-5 font-bold flex items-center justify-center">
               <div className="flex items-center justify-center flex-col gap-40">
                 <div className="flex flex-col items-center justify-center gap-5">
-                  <button className="border border-black bg-white rounded-2xl p-3 font-bold hover:cursor-pointer hover:bg-gray-200">
-                    Example
-                  </button>
-                  <div className="w-1/3 h-1/3 flex items-center justify-center">
-                    <div>
+                  <div className="flex flex-col gap-4">
+                    <ProgressBar value={progress} />
+                    <Slider value={progress} setvalue={setProgress} />
+                  </div>
+                  <div className="w-2/3 h-1/3 flex items-center justify-center">
+                    <div className="w-full h-full">
                       <CodeBox>
-                        <div className="h-full w-full overflow-auto">
-                          <pre className="p-5 text-sm">
-                            {`export default function MainPage() {
-    
-    return (
-      <Button>
-      Example
-      </Button>
-    )
+                        <div className="h-full w-full overflow-y-auto p-5">
+                          <pre className="text-sm">
+                            {`import ProgressBar from "@/components/progressbar/progressbar"
+import { useState } from "react"
+
+export default function Example() {
+  const [progress, setProgress] = useState(50)
+  
+  return (
+    <ProgressBar 
+      value={progress}
+      showLabel={true}
+    />
+  )
 }`}
                           </pre>
                         </div>
@@ -208,7 +209,7 @@ export default function Button() {
                   {installmethod === "Manual" && (
                     <div className=" w-2/3 h-full items-center justify-center flex flex-col gap-5">
                       <div
-                        className="border w-full p-10 rounded-4xl"
+                        className="border w-full p-10 gap-5 flex flex-col rounded-4xl"
                         style={
                           {
                             opacity: 0,
@@ -217,16 +218,44 @@ export default function Button() {
                         }
                       >
                         <p className="font-bold text-sm">
-                          Copy the code ant put it in your component
+                          Install dependeceies
+                        </p>
+                        <CodeBox>
+                          <pre className="text-sm p-4">{`npm install @radix-ui/react-progress`}</pre>
+                        </CodeBox>
+                        <p className="font-bold text-sm">
+                          Copy the code and put it in your component
                         </p>
                         <CodeBox>
                           <div className="h-full w-full overflow-auto p-5">
                             <pre className="text-sm">
-                              {`export default function Button({ children }: { children: React.ReactNode }) {
-   return (
-    <button className="border border-black bg-white rounded-2xl p-3 font-bold hover:cursor-pointer hover:bg-gray-200">
-    {children}
-    </button>
+                              {`type ProgressBarProps = {
+  value: number // 0-100
+  showLabel?: boolean
+}
+
+export default function ProgressBar({
+  value,
+  showLabel = true,
+}: ProgressBarProps) {
+  const clampedValue = Math.max(0, Math.min(100, value))
+
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <div className="relative w-64 h-6 bg-gray-300 rounded-full overflow-hidden">
+        <Progress.Root className="w-full h-full" value={clampedValue}>
+          <Progress.Indicator
+            className="h-full bg-gray-600 transition-all duration-500"
+            style={{ width: \`\${clampedValue}%\` }}
+          />
+        </Progress.Root>
+        {showLabel && (
+          <span className="absolute inset-0 flex items-center justify-center text-white font-bold">
+            {clampedValue}%
+          </span>
+        )}
+      </div>
+    </div>
   )
 }`}
                             </pre>

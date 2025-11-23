@@ -1,9 +1,14 @@
 import Link from "next/link"
+import { InteractiveGridPattern } from "@/components/ui/shadcn-io/interactive-grid-pattern"
 
 export default function HomePage() {
   return (
-    <div className="h-screen  w-full justify-center items-center flex">
-      <div className="flex flex-col gap-5">
+    <div className="h-screen relative w-screen justify-center items-center flex overflow-hidden">
+      <InteractiveGridPattern
+        className="absolute h-[500%] skew-y-12  inset-0 -top-65"
+        squares={[100, 100]}
+      />
+      <div className="flex flex-col relative z-10 gap-5">
         <div className="flex flex-col items-center justify-center">
           <p className="text-4xl font-serif font-bold text-black">FrameUI</p>
           <p className=" font-serif font-bold text-white">
@@ -18,7 +23,7 @@ export default function HomePage() {
           </a>
           <Link href="/Docs/Start">
             <button className="border border-[#363636] items-center text-white justify-center flex bg-[#121212] rounded-2xl p-3 font-bold hover:cursor-pointer hover:bg-gray-800">
-              Documenation
+              Documentation
             </button>
           </Link>
         </div>

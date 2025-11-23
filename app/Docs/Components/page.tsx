@@ -2,7 +2,7 @@
 import CodeBox from "@/components/Code/code"
 import Menu from "@/components/Menu/menu"
 import NavBar from "@/components/NavBar/navbar"
-import SearchBar from "@/components/searchbar/searchbar"
+import Slider from "@/components/slider/slider"
 import {
   IconChevronLeft,
   IconMenu2,
@@ -11,11 +11,20 @@ import {
 } from "@tabler/icons-react"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import Button from "./Alert/page"
+import ButtonComponent from "@/components/button/button"
+import ProgressBar from "@/components/progressbar/progressbar"
+import { Code } from "lucide-react"
+import { Switch } from "@radix-ui/react-switch"
+import SwitchComponent from "@/components/switch/switch"
+import Input from "@/components/input/input"
+import SearchBar from "@/components/searchbar/searchbar"
 
-export default function Button() {
+export default function SliderPage() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [isVisible, setisVisible] = useState(false)
   const [installmethod, setInstallmethod] = useState<"Manual" | "CLI">("CLI")
+  const [progress, setProgress] = useState(50)
 
   useEffect(() => {
     setTimeout(() => setisVisible(true), 10)
@@ -152,106 +161,31 @@ export default function Button() {
           </div>
         </Menu>
       )}
-      <div className="h-full w-full items-center justify-center flex overflow-y-auto">
+      <div className="h-full flex-col w-full items-center justify-center flex gap-12 overflow-y-auto">
+        <p className="font-bold text-4xl">Components</p>
         <div className="flex flex-col h-4/5 w-4/5 border rounded-4xl gap-10 p-15 overflow-y-auto">
-          <div className="w-full h-16">
-            <p className=" text-6xl flex items-center flex-row">
-              <IconPoint />
-              Button
-            </p>
-            <p className="ml-7 text-xl font-bold">
-              Well a button nothing more nothing less
-            </p>
-          </div>
-          <div>
-            <div className="flex-col gap-y-5 font-bold flex items-center justify-center">
-              <div className="flex items-center justify-center flex-col gap-40">
-                <div className="flex flex-col items-center justify-center gap-5">
-                  <button className="border border-black bg-white rounded-2xl p-3 font-bold hover:cursor-pointer hover:bg-gray-200">
-                    Example
-                  </button>
-                  <div className="w-1/3 h-1/3 flex items-center justify-center">
-                    <div>
-                      <CodeBox>
-                        <div className="h-full w-full overflow-auto">
-                          <pre className="p-5 text-sm">
-                            {`export default function MainPage() {
-    
-    return (
-      <Button>
-      Example
-      </Button>
-    )
-}`}
-                          </pre>
-                        </div>
-                      </CodeBox>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex-col flex gap-5 w-full justify-center items-center">
-                  <div className="flex flex-row items-center justify-center border-b border-[#b8b8b8] gap-10 pb-5">
-                    <p>Installation :</p>
-                    <button
-                      className="bg-[#b8b8b8] w-30 p-4 items-center rounded-2xl justify-center flex hover:bg-[#a9a9a9]"
-                      onClick={() => setInstallmethod("Manual")}
-                    >
-                      Manual
-                    </button>
-                    <button
-                      className="bg-[#b8b8b8] w-30 p-4 items-center rounded-2xl justify-center flex hover:bg-[#a9a9a9]"
-                      onClick={() => setInstallmethod("CLI")}
-                    >
-                      CLI
-                    </button>
-                  </div>
-                  {installmethod === "Manual" && (
-                    <div className=" w-2/3 h-full items-center justify-center flex flex-col gap-5">
-                      <div
-                        className="border w-full p-10 rounded-4xl"
-                        style={
-                          {
-                            opacity: 0,
-                            animation: "fadeIn 500ms ease-out 10ms forwards",
-                          } as React.CSSProperties
-                        }
-                      >
-                        <p className="font-bold text-sm">
-                          Copy the code ant put it in your component
-                        </p>
-                        <CodeBox>
-                          <div className="h-full w-full overflow-auto p-5">
-                            <pre className="text-sm">
-                              {`export default function Button({ children }: { children: React.ReactNode }) {
-   return (
-    <button className="border border-black bg-white rounded-2xl p-3 font-bold hover:cursor-pointer hover:bg-gray-200">
-    {children}
-    </button>
-  )
-}`}
-                            </pre>
-                          </div>
-                        </CodeBox>
-                      </div>
-                    </div>
-                  )}
-                  {installmethod === "CLI" && (
-                    <div
-                      className="flex w-full flex-col gap-5"
-                      style={
-                        {
-                          opacity: 0,
-                          animation: "fadeIn 500ms ease-out 10ms forwards",
-                        } as React.CSSProperties
-                      }
-                    >
-                      <CodeBox>
-                        <pre className="text-sm p-5 w-full">{`npm i frameui-package`}</pre>
-                      </CodeBox>
-                    </div>
-                  )}
-                </div>
-              </div>
+          <div className="grid grid-cols-2 grid-rows-3 gap-50">
+            <div className="flex items-center justify-center">
+              <ButtonComponent>
+                <div>Button</div>
+              </ButtonComponent>
+            </div>
+            <div className="flex items-center justify-center">
+              <Slider value={progress} setvalue={setProgress} />
+            </div>
+            <div className="flex items-center justify-center">
+              <ProgressBar value={progress} />
+            </div>
+            <div className="flex items-center justify-center">
+              <CodeBox>
+                <pre className="p-5 text-sm">{"smth"}</pre>
+              </CodeBox>
+            </div>
+            <div className="flex items-center justify-center">
+              <SwitchComponent />
+            </div>
+            <div className="flex items-center justify-center">
+              <Input />
             </div>
           </div>
         </div>
