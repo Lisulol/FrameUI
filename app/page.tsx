@@ -5,15 +5,13 @@ export default function HomePage() {
   return (
     <div className="h-screen relative w-screen justify-center items-center flex overflow-hidden">
       <InteractiveGridPattern
-        className="absolute h-[500%] skew-y-12  inset-0 -top-65"
+        className="absolute h-[500%] skew-y-12 inset-0 -top-65"
         squares={[100, 100]}
       />
       <div className="flex flex-col relative z-10 gap-5">
         <div className="flex flex-col items-center justify-center">
           <p className="text-4xl font-serif font-bold text-black">FrameUI</p>
-          <p className=" font-serif font-bold text-white">
-            Component Framework
-          </p>
+          <p className=" font-serif font-bold text-black">Component Library</p>
         </div>
         <div className="flex items-center justify-between gap-5">
           <a href="https://github.com/Lisulol" target={"_blank"}>
